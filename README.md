@@ -4,7 +4,7 @@ PyCon mini 東海 2025 のトーク「PyScriptとOpenCVを使ってWebで画像�
 <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/6fd581f3-7b3c-4468-b11e-40e5ac23b7ea" />
 
 # Public URL for the presentation
-プレゼン資料公開URLは以下です。
+プレゼン資料公開URLは以下です。<Br>
 https://kazuhito00.github.io/Pycon-mini-Tokai-2025-PyScript-OpenCV/index.html
 
 # Public URL for the demo
