@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            font-family: 'Courier New', monospace;
+            overflow: auto;
+        }
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 0;
+            font-size: 12.2px;
+            line-height: 1.5;
+        }
+        .keyword { color: #ff79c6; }
+        .string { color: #f1fa8c; }
+        .function { color: #50fa7b; }
+        .comment { color: #6272a4; }
+        .number { color: #bd93f9; }
+        .file-label {
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 16.8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="file-label">main.py (抜粋)</div>
+    <pre><code><span class="comment">#### ToDo：メモリリーク箇所</span>
+<span class="comment"># # メモリリークするけど早い処理</span>
+<span class="comment"># # NumPy 配列のバッファを使用して Uint8ClampedArray を作成</span>
+<span class="comment"># buffer = image.flatten().tobytes()</span>
+<span class="comment"># bytes_proxy = create_proxy(buffer)</span>
+<span class="comment"># try:</span>
+<span class="comment">#     # 新しい ImageData オブジェクトを作成</span>
+<span class="comment">#     bytes_buffer = bytes_proxy.getBuffer("u8clamped").data</span>
+<span class="comment">#     new_image_data = js.ImageData.new(bytes_buffer, canvas.width, canvas.height)</span>
+<span class="comment">#     context.putImageData(new_image_data, 0, 0)</span>
+<span class="comment"># finally:</span>
+<span class="comment">#     # キャンバスに画像データを描画</span>
+<span class="comment">#     bytes_proxy.destroy()</span>
+<span class="comment">#     del bytes_proxy, bytes_buffer, new_image_data</span>
+
+<span class="comment"># メモリリークしないけど遅い処理</span>
+height, width, _ = image.shape
+buffer = image.<span class="function">flatten</span>().<span class="function">tobytes</span>()
+js_image = ImageData.<span class="function">new</span>(<span class="function">Uint8ClampedArray</span>.<span class="function">new</span>(buffer), width, height)
+context.<span class="function">putImageData</span>(js_image, <span class="number">0</span>, <span class="number">0</span>)
+<span class="comment">####</span></code></pre>
+</body>
+</html>

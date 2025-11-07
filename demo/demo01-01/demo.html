@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello World</title>
+        <link rel="stylesheet" href="https://pyscript.net/releases/2025.10.3/core.css">
+        <script type="module" src="https://pyscript.net/releases/2025.10.3/core.js"></script>
+        <style>
+            .reset-button {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 10px 20px;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+            .reset-button:hover {
+                background-color: #45a049;
+            }
+        </style>
+    </head>
+    <body>
+        <script type="py">
+            from pyscript import display
+            from datetime import datetime
+
+            now = datetime.now()
+
+            display("Hello World: " + now.strftime("%Y/%m/%d %H:%M:%S"))
+        </script>
+    </body>
+</html>

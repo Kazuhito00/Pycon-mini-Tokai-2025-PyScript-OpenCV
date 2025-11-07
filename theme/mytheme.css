@@ -1,0 +1,604 @@
+/*
+ * @theme mytheme
+ * @auto-scaling true
+*/
+
+/* ========================================
+   カラー・フォント変数
+   ======================================== */
+:root {
+    /* フォント */
+    --font-family: "HG丸ｺﾞｼｯｸM-PRO", "Hiragino Maru Gothic ProN", sans-serif;
+
+    /* アクセントカラー */
+    --blue-very-deep: #2C67E5;
+    --red-deep: #DF3756;
+
+    /* グレースケール */
+    --gray-darkest: #000000;
+    --gray-dark: #262626;
+    --gray-medium: #434343;
+    --gray-light: #595959;
+    --gray-lighter: #646464;
+    --gray-lightest: #999999;
+
+    /* 基本カラー */
+    --white: #FFFFFF;
+    --black: #000000;
+
+    /* 背景カラー */
+    --bg-default: #FFFFFF;
+    --bg-accent: #F3F3F3;
+    --bg-accent-code: #e1e1e1;
+    --border-color: #D9D9D9;
+
+    /* フォントサイズ */
+    --font-size-title: 52px;
+    --font-size-large: 36px;
+    --font-size-medium: 52px;
+    --font-size-body: 34px;
+    --font-size-small: 22px;
+    --font-size-caption: 20px;
+    --font-size-note: 32px;
+
+    /* 行間 */
+    --line-height-tight: 1.15;
+    --line-height-normal: 1.21;
+    --line-height-loose: 1.5;
+
+    /* レイアウト */
+    --slide-width: 1920px;
+    --slide-height: 1080px;
+    --content-padding: 92px;
+    --border-radius: 8px;
+    --border-width: 1.47px;
+}
+
+/* ========================================
+   基本スタイル
+   ======================================== */
+*:not(code *) {
+    color: var(--gray-medium);
+}
+
+/* 見出し */
+h1 {
+    font-size: var(--font-size-title);
+    line-height: var(--line-height-tight);
+    font-weight: 600;
+    margin: 6px 0;
+    padding-bottom: 0;
+}
+
+h2 {
+    font-size: var(--font-size-large);
+    line-height: var(--line-height-tight);
+    font-weight: 600;
+    margin: 4px 0;
+    padding-bottom: 0;
+}
+
+h3 {
+    font-size: var(--font-size-medium);
+    line-height: var(--line-height-normal);
+    font-weight: 600;
+    margin: 4px 0;
+    padding-bottom: 0;
+}
+
+h4 {
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-normal);
+    font-weight: 600;
+    margin: 4px 0;
+    padding-bottom: 0;
+}
+
+h5 {
+    font-size: var(--font-size-small);
+    line-height: var(--line-height-normal);
+    font-weight: 600;
+    margin: 4px 0;
+    padding-bottom: 0;
+}
+
+h6 {
+    font-size: var(--font-size-caption);
+    line-height: var(--line-height-normal);
+    font-weight: 600;
+    margin: 4px 0;
+    padding-bottom: 0;
+}
+
+h1>strong, h2>strong, h3>strong,
+h4>strong, h5>strong, h6>strong {
+    color: var(--blue-very-deep);
+}
+
+/* 本文・段落 */
+p {
+    font-size: var(--font-size-body);
+    color: var(--gray-medium);
+    line-height: var(--line-height-loose);
+    margin: 0 0 8px 0;
+}
+
+/* リスト */
+ul, ol {
+    font-size: var(--font-size-body);
+    color: var(--gray-medium);
+    line-height: var(--line-height-loose);
+    padding-left: 0;
+    margin: 0 0 8px 22px;
+}
+
+ol {
+    margin-left: 32px;
+}
+
+li {
+    padding-top: 6px;
+}
+
+li:first-child {
+    padding-top: 0;
+}
+
+li ul, li ol {
+    margin-left: 0;
+    padding-left: 32px;
+    margin-top: 0;
+}
+
+h1 + ul, h1 + ol,
+h2 + ul, h2 + ol,
+h3 + ul, h3 + ol,
+h4 + ul, h4 + ol,
+h5 + ul, h5 + ol,
+h6 + ul, h6 + ol {
+    margin-top: 0;
+}
+
+/* コード */
+code {
+    background-color: var(--bg-accent-code);
+    color: var(--gray-darkest);
+}
+
+:is(pre, marp-pre) {
+    background-color: var(--bg-accent-code);
+    font-size: var(--font-size-small);
+    margin-bottom: 8px;
+}
+
+/* 強調・斜体 */
+strong {
+    font-weight: 700;
+    color: var(--gray-medium);
+}
+
+em {
+    font-style: italic;
+    color: var(--gray-medium);
+}
+
+/* 引用 */
+blockquote {
+    font-size: var(--font-size-body);
+    color: var(--gray-medium);
+    border-left: 4px solid var(--gray-light);
+    padding-left: 1rem;
+    margin: 12px 0;
+    font-style: italic;
+}
+
+blockquote::after,
+blockquote::before,
+blockquote p::after {
+    display: none;
+}
+
+/* リンク */
+a {
+    color: var(--blue-very-deep);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* 表 */
+table {
+    font-size: 18px;
+    color: var(--gray-medium);
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: var(--white);
+}
+
+table thead th {
+    background-color: var(--bg-accent);
+    color: var(--gray-medium);
+    border: 1.3px solid var(--border-color);
+    font-weight: 400;
+}
+
+table tbody td {
+    background-color: var(--white);
+    color: var(--gray-medium);
+    border: 1.3px solid var(--border-color);
+}
+
+/* 小さなテキスト */
+small {
+    font-size: var(--font-size-note);
+    color: var(--gray-light);
+    line-height: var(--line-height-normal);
+}
+
+/* ========================================
+   スライド基本レイアウト
+   ======================================== */
+section {
+    background-color: var(--bg-default);
+    font-family: var(--font-family);
+    height: 100%;
+    padding: 100px 60px 0 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    position: relative;
+}
+
+/* ヘッダーなしスライド */
+section.no-header {
+    padding: 30px 60px 0 60px;
+}
+
+/* スライドタイトル（h1） */
+section > h1:first-child:not(.no-header > h1) {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    padding-left: 40px;
+    color: var(--gray-medium);
+    margin: 0;
+}
+
+/* タイトル下線 */
+section > h1:first-child:not(.no-header > h1)::after {
+    content: "";
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--black);
+    z-index: 100;
+}
+
+/* ページ番号 */
+section::after {
+    position: absolute;
+    top: 0;
+    right: 30px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    font-size: var(--font-size-caption);
+    color: var(--gray-lightest);
+    margin: 0;
+}
+
+/* ========================================
+   セクションスタイル（section0-17）
+   ======================================== */
+
+/* 共通: フルスクリーン背景セクション */
+section.section0,
+section.section01,
+section.section02,
+section.section03,
+section.section04,
+section.section05,
+section.section06,
+section.section07,
+section.section08,
+section.section09,
+section.section10,
+section.section11,
+section.section12,
+section.section13,
+section.section14,
+section.section15,
+section.section16,
+section.section17 {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--bg-accent);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 0;
+    height: 100%;
+}
+
+section.section0 h1,
+section.section01 h1,
+section.section02 h1,
+section.section03 h1,
+section.section04 h1,
+section.section05 h1,
+section.section06 h1,
+section.section07 h1,
+section.section08 h1,
+section.section09 h1,
+section.section10 h1,
+section.section11 h1,
+section.section12 h1,
+section.section13 h1,
+section.section14 h1,
+section.section15 h1,
+section.section16 h1,
+section.section17 h1 {
+    text-align: center;
+    position: static;
+    font-size: 52px;
+    font-weight: 500;
+}
+
+section.section0::after,
+section.section01::after,
+section.section02::after,
+section.section03::after,
+section.section04::after,
+section.section05::after,
+section.section06::after,
+section.section07::after,
+section.section08::after,
+section.section09::after,
+section.section10::after,
+section.section11::after,
+section.section12::after,
+section.section13::after,
+section.section14::after,
+section.section15::after,
+section.section16::after,
+section.section17::after {
+    display: none;
+}
+
+/* section0: タイトルスライド（特殊） */
+section.section0 h1,
+section.section0 p,
+section.section0 * {
+    color: #f7ebeb !important;
+}
+
+/* section01: オレンジテキスト */
+section.section01 {
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    padding: 60px !important;
+}
+
+section.section01 h1,
+section.section01 h1 * {
+    font-size: 52px !important;
+    text-align: left !important;
+    color: #de6739 !important;
+}
+
+section.section01 p,
+section.section01 * {
+    text-align: left !important;
+    color: #2C4947 !important;
+}
+
+/* section02, 03, 04: ダークテキスト */
+section.section02 h1,
+section.section02 p,
+section.section02 *,
+section.section03 h1,
+section.section03 p,
+section.section03 *,
+section.section04 h1,
+section.section04 p,
+section.section04 * {
+    color: #2C4947 !important;
+}
+
+/* section05-17: 左寄せレイアウト */
+section.section05,
+section.section06,
+section.section07,
+section.section08,
+section.section09,
+section.section10,
+section.section11,
+section.section12,
+section.section13,
+section.section14,
+section.section15,
+section.section16,
+section.section17 {
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    padding: 60px !important;
+}
+
+section.section05 h1,
+section.section06 h1,
+section.section07 h1,
+section.section08 h1,
+section.section09 h1,
+section.section10 h1,
+section.section11 h1,
+section.section12 h1,
+section.section13 h1,
+section.section14 h1,
+section.section15 h1,
+section.section16 h1,
+section.section17 h1 {
+    font-size: 52px !important;
+    text-align: left !important;
+    color: #de6739 !important;
+}
+
+section.section05 h1 *,
+section.section06 h1 *,
+section.section07 h1 *,
+section.section08 h1 *,
+section.section09 h1 *,
+section.section10 h1 *,
+section.section11 h1 *,
+section.section12 h1 *,
+section.section13 h1 *,
+section.section14 h1 *,
+section.section15 h1 *,
+section.section16 h1 *,
+section.section17 h1 * {
+    color: #de6739 !important;
+}
+
+section.section05 p,
+section.section05 *,
+section.section06 p,
+section.section06 *,
+section.section07 p,
+section.section07 *,
+section.section08 p,
+section.section08 *,
+section.section09 p,
+section.section09 *,
+section.section10 p,
+section.section10 *,
+section.section11 p,
+section.section11 *,
+section.section12 p,
+section.section12 *,
+section.section13 p,
+section.section13 *,
+section.section14 p,
+section.section14 *,
+section.section15 p,
+section.section15 *,
+section.section16 p,
+section.section16 *,
+section.section17 p,
+section.section17 * {
+    text-align: left !important;
+    color: #2C4947 !important;
+}
+
+/* 背景画像 */
+section.section0  { background-image: url('image/00.gif'); }
+section.section01 { background-image: url('image/02.gif'); }
+section.section02 { background-image: url('image/04.PNG'); }
+section.section03 { background-image: url('image/05.PNG'); }
+section.section04 { background-image: url('image/06.PNG'); }
+section.section05 { background-image: url('image/07.gif'); }
+section.section06 { background-image: url('image/08.gif'); }
+section.section07 { background-image: url('image/09.gif'); }
+section.section08 { background-image: url('image/10.gif'); }
+section.section09 { background-image: url('image/11.gif'); }
+section.section10 { background-image: url('image/03.gif'); }
+section.section11 { background-image: url('image/14.gif'); }
+section.section12 { background-image: url('image/15.png'); }
+section.section13 { background-image: url('image/03.gif'); }
+section.section14 { background-image: url('image/12.gif'); }
+section.section15 { background-image: url('image/03.gif'); }
+section.section16 { background-image: url('image/13.gif'); }
+section.section17 { background-image: url('image/18.gif'); }
+
+/* ========================================
+   タイトルスライド
+   ======================================== */
+section.title {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--bg-accent);
+    background-image: url('image/01.gif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 0;
+    height: 100%;
+}
+
+section.title h1 {
+    text-align: center;
+    position: static;
+    font-size: 52px;
+    font-weight: 500;
+    color: #f7ebeb !important;
+}
+
+section.title p,
+section.title * {
+    color: #f7ebeb !important;
+}
+
+section.title::after {
+    display: none;
+}
+
+/* ========================================
+   ユーティリティクラス
+   ======================================== */
+
+/* テキスト配置 */
+section.all-text-center,
+section.h1-text-center h1,
+section.h2-text-center h2,
+section.h3-text-center h3,
+section.h4-text-center h4,
+section.h5-text-center h5,
+section.h6-text-center h6,
+section.text-center p {
+    text-align: center;
+}
+
+section.align-center {
+    justify-content: center;
+}
+
+/* テキストカラー */
+section.all-text-blue *,
+section.text-blue p {
+    color: var(--blue-very-deep);
+}
+
+section.all-text-red *,
+section.h1-text-red h1,
+section.h2-text-red h2,
+section.h3-text-red h3,
+section.h4-text-red h4,
+section.h5-text-red h5,
+section.h6-text-red h6,
+section.text-red p {
+    color: var(--red-deep);
+}
+
+/* 画像レイアウト */
+section.image > p:has(img) {
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+section.image-shadow img {
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}

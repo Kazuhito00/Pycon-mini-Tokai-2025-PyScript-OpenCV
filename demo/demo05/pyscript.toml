@@ -1,0 +1,5 @@
+packages = ["opencv-python", "numpy"]
+name = "Test"
+[[fetch]]
+files = ["./yolov9wholebody25.py", "./model/yolov9_n_wholebody25_0100_1x3x192x320.onnx"]
+

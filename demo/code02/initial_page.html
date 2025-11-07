@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            font-family: 'Courier New', monospace;
+            overflow: auto;
+        }
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 0;
+            font-size: 12.8px;
+            line-height: 1.5;
+        }
+        .keyword { color: #ff79c6; }
+        .string { color: #f1fa8c; }
+        .function { color: #50fa7b; }
+        .comment { color: #6272a4; }
+        .number { color: #bd93f9; }
+    </style>
+</head>
+<body>
+    <pre><code><span class="keyword">import</span> js
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">import</span> cv2
+
+<span class="keyword">def</span> <span class="function">process_frame_with_opencv</span>(video_element):
+    <span class="comment"># ビデオの寸法を取得</span>
+    width, height = video_element.videoWidth, video_element.videoHeight
+
+    <span class="comment"># キャンバスを作成してフレームをキャプチャ</span>
+    canvas = js.document.<span class="function">createElement</span>(<span class="string">"canvas"</span>)
+    canvas.width, canvas.height = width, height
+    ctx = canvas.<span class="function">getContext</span>(<span class="string">"2d"</span>)
+    ctx.<span class="function">drawImage</span>(video_element, <span class="number">0</span>, <span class="number">0</span>, width, height)
+
+    <span class="comment"># 生のピクセルデータを取得</span>
+    image_data = ctx.<span class="function">getImageData</span>(<span class="number">0</span>, <span class="number">0</span>, width, height).data
+
+    <span class="comment"># OpenCV用にnumpy配列に変換後、 RGBAからBGRに変換</span>
+    frame = np.<span class="function">asarray</span>(image_data, dtype=np.uint8).<span class="function">reshape</span>((height, width, <span class="number">4</span>))
+    frame_bgr = cv2.<span class="function">cvtColor</span>(frame, cv2.COLOR_RGBA2BGR)
+
+    <span class="comment"># OpenCVで画像を処理（省略）</span>
+    <span class="keyword">return</span> frame_bgr</code></pre>
+</body>
+</html>

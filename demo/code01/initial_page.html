@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            font-family: 'Courier New', monospace;
+            overflow: auto;
+        }
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .keyword { color: #ff79c6; }
+        .string { color: #f1fa8c; }
+        .function { color: #50fa7b; }
+        .comment { color: #6272a4; }
+        .number { color: #bd93f9; }
+    </style>
+</head>
+<body>
+    <pre><code><span class="keyword">import</span> cv2
+
+<span class="comment"># モデル読み込み</span>
+net = cv2.dnn.<span class="function">readNetFromONNX</span>(<span class="string">"model.onnx"</span>)
+
+<span class="comment"># ビデオキャプチャ</span>
+cap = cv2.<span class="function">VideoCapture</span>(<span class="number">0</span>)
+
+<span class="keyword">while</span> <span class="keyword">True</span>:
+    ret, frame = cap.<span class="function">read</span>()
+
+    <span class="comment"># 前処理</span>
+    blob = cv2.dnn.<span class="function">blobFromImage</span>(frame, scalefactor=<span class="number">1</span>/<span class="number">255.0</span>, size=(<span class="number">224</span>, <span class="number">224</span>), swapRB=<span class="keyword">True</span>)
+    net.<span class="function">setInput</span>(blob)
+
+    <span class="comment"># 推論</span>
+    out = net.<span class="function">forward</span>()
+    <span class="comment"># 後処理や表示など（中略）</span>
+
+cap.<span class="function">release</span>()
+cv2.<span class="function">destroyAllWindows</span>()</code></pre>
+</body>
+</html>

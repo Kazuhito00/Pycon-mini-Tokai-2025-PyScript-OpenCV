@@ -1,0 +1,8 @@
+{
+  "name": "Hello World Demo",
+  "description": "Simple PyScript Hello World example",
+  "version": "1.0.0",
+  "files": {
+    "./main.py": ""
+  }
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            font-family: 'Courier New', monospace;
+            overflow: auto;
+        }
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .keyword { color: #ff79c6; }
+        .string { color: #f1fa8c; }
+        .function { color: #50fa7b; }
+        .comment { color: #6272a4; }
+    </style>
+</head>
+<body>
+    <pre><code><span class="comment">&lt;!DOCTYPE html&gt;</span>
+<span class="keyword">&lt;html&gt;</span>
+    <span class="keyword">&lt;head&gt;</span>
+        <span class="keyword">&lt;title&gt;</span>Hello World<span class="keyword">&lt;/title&gt;</span>
+        <span class="keyword">&lt;link</span> rel=<span class="string">"stylesheet"</span> href=<span class="string">"https://pyscript.net/releases/2025.10.3/core.css"</span><span class="keyword">&gt;</span>
+        <span class="keyword">&lt;script</span> type=<span class="string">"module"</span> src=<span class="string">"https://pyscript.net/releases/2025.10.3/core.js"</span><span class="keyword">&gt;&lt;/script&gt;</span>
+    <span class="keyword">&lt;/head&gt;</span>
+    <span class="keyword">&lt;body&gt;</span>
+        <span class="keyword">&lt;script</span> type=<span class="string">"py"</span><span class="keyword">&gt;</span>
+            <span class="keyword">from</span> pyscript <span class="keyword">import</span> <span class="function">display</span>
+            <span class="keyword">from</span> datetime <span class="keyword">import</span> datetime
+
+            now = datetime.<span class="function">now</span>()
+
+            <span class="function">display</span>(<span class="string">"Hello World: "</span> + now.<span class="function">strftime</span>(<span class="string">"%Y/%m/%d %H:%M:%S"</span>))
+        <span class="keyword">&lt;/script&gt;</span>
+    <span class="keyword">&lt;/body&gt;</span>
+<span class="keyword">&lt;/html&gt;</span></code></pre>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            font-family: 'Courier New', monospace;
+            overflow: auto;
+        }
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 10px 0;
+            font-size: 16.8px;
+            line-height: 1.5;
+        }
+        .keyword { color: #ff79c6; }
+        .string { color: #f1fa8c; }
+        .function { color: #50fa7b; }
+        .comment { color: #6272a4; }
+        .file-label {
+            color: #333;
+            font-weight: bold;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-size: 19.2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="file-label">index.html</div>
+    <pre><code><span class="comment">&lt;!DOCTYPE html&gt;</span>
+<span class="keyword">&lt;html&gt;</span>
+    <span class="keyword">&lt;head&gt;</span>
+        <span class="keyword">&lt;title&gt;</span>Hello World<span class="keyword">&lt;/title&gt;</span>
+        <span class="keyword">&lt;link</span> rel=<span class="string">"stylesheet"</span> href=<span class="string">"https://pyscript.net/releases/2025.10.3/core.css"</span><span class="keyword">&gt;</span>
+        <span class="keyword">&lt;script</span> type=<span class="string">"module"</span> src=<span class="string">"https://pyscript.net/releases/2025.10.3/core.js"</span><span class="keyword">&gt;&lt;/script&gt;</span>
+        <span class="keyword">&lt;script</span> type=<span class="string">"py"</span> src=<span class="string">"./main.py"</span> config=<span class="string">"./pyscript.json"</span><span class="keyword">&gt;&lt;/script&gt;</span>
+    <span class="keyword">&lt;/head&gt;</span>
+    <span class="keyword">&lt;body&gt;</span>
+    <span class="keyword">&lt;/body&gt;</span>
+<span class="keyword">&lt;/html&gt;</span></code></pre>
+
+    <div class="file-label">main.py</div>
+    <pre><code><span class="keyword">from</span> pyscript <span class="keyword">import</span> <span class="function">display</span>
+<span class="keyword">from</span> datetime <span class="keyword">import</span> datetime
+
+now = datetime.<span class="function">now</span>()
+
+<span class="function">display</span>(<span class="string">"Hello World: "</span> + now.<span class="function">strftime</span>(<span class="string">"%Y/%m/%d %H:%M:%S"</span>))</code></pre>
+
+    <div class="file-label">pyscript.json</div>
+    <pre><code>{
+  <span class="string">"name"</span>: <span class="string">"Hello World Demo"</span>,
+  <span class="string">"description"</span>: <span class="string">"Simple PyScript Hello World example"</span>,
+  <span class="string">"version"</span>: <span class="string">"1.0.0"</span>,
+  <span class="string">"files"</span>: {
+    <span class="string">"./main.py"</span>: <span class="string">""</span>
+  }
+}</code></pre>
+</body>
+</html>

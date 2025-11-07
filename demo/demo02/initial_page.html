@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            font-family: 'Courier New', monospace;
+            overflow: auto;
+            font-size: 14.4px;
+        }
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 8px 0;
+            font-size: 13.2px;
+            line-height: 1.4;
+        }
+        .keyword { color: #ff79c6; }
+        .string { color: #f1fa8c; }
+        .function { color: #50fa7b; }
+        .comment { color: #6272a4; }
+        .file-label {
+            color: #333;
+            font-weight: bold;
+            margin-top: 12px;
+            margin-bottom: 3px;
+            font-size: 16.8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="file-label">demo.html (抜粋)</div>
+    <pre><code><span class="keyword">&lt;script</span> type=<span class="string">"module"</span> src=<span class="string">"https://pyscript.net/releases/2025.8.1/core.js"</span><span class="keyword">&gt;&lt;/script&gt;</span>
+
+<span class="keyword">&lt;table</span> id=<span class="string">"board"</span><span class="keyword">&gt;</span>
+    <span class="keyword">&lt;tr&gt;</span>
+        <span class="keyword">&lt;td&gt;&lt;div</span> id=<span class="string">"cell00"</span> data-x=<span class="string">"0"</span> data-y=<span class="string">"0"</span> class=<span class="string">"cell"</span><span class="keyword">&gt;&lt;/div&gt;&lt;/td&gt;</span>
+        <span class="keyword">&lt;td&gt;&lt;div</span> id=<span class="string">"cell01"</span> data-x=<span class="string">"0"</span> data-y=<span class="string">"1"</span> class=<span class="string">"cell"</span><span class="keyword">&gt;&lt;/div&gt;&lt;/td&gt;</span>
+        <span class="keyword">&lt;td&gt;&lt;div</span> id=<span class="string">"cell02"</span> data-x=<span class="string">"0"</span> data-y=<span class="string">"2"</span> class=<span class="string">"cell"</span><span class="keyword">&gt;&lt;/div&gt;&lt;/td&gt;</span>
+    <span class="keyword">&lt;tr&gt;</span>
+        <span class="comment">&lt;!-- ... 他のセル ... --&gt;</span>
+    <span class="keyword">&lt;/tr&gt;</span>
+<span class="keyword">&lt;/table&gt;</span>
+
+<span class="keyword">&lt;script</span> src=<span class="string">"./main.py"</span> config=<span class="string">"./pyscript.toml"</span> type=<span class="string">"mpy"</span><span class="keyword">&gt;&lt;/script&gt;</span></code></pre>
+
+    <div class="file-label">main.py (抜粋)</div>
+    <pre><code><span class="keyword">from</span> pyscript.web <span class="keyword">import</span> page, when
+
+<span class="keyword">class</span> <span class="function">TicTacToe</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(self):
+        self.board, = page[<span class="string">"table#board"</span>]
+        self.init_cells()
+        self.new_game()
+
+    <span class="keyword">def</span> <span class="function">click</span>(self, event):
+        <span class="comment"># クリック位置の属性を取得</span>
+        x_attr = event.target.getAttribute(<span class="string">'data-x'</span>)
+        y_attr = event.target.getAttribute(<span class="string">'data-y'</span>)
+
+        <span class="comment"># セル以外のクリックは無視</span>
+        <span class="keyword">if</span> x_attr <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">or</span> y_attr <span class="keyword">is</span> <span class="keyword">None</span>:
+            <span class="function">print</span>(<span class="string">'Click outside of cell, ignoring'</span>)
+            <span class="keyword">return</span>
+
+        i = <span class="function">int</span>(x_attr)
+        j = <span class="function">int</span>(y_attr)
+        <span class="comment"># ... ゲームロジック ...</span>
+
+GAME = <span class="function">TicTacToe</span>()
+
+<span class="comment">@when("click", "#board")</span>
+<span class="keyword">def</span> <span class="function">user_click</span>(event):
+    GAME.<span class="function">click</span>(event)</code></pre>
+
+    <div class="file-label">pyscript.toml</div>
+    <pre><code>name = <span class="string">"Tic Tac Toe"</span>
+description = <span class="string">"A Tic-Tac-Toe game written in PyScript"</span></code></pre>
+</body>
+</html>

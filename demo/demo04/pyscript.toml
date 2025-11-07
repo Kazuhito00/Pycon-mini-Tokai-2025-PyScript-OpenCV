@@ -1,0 +1,5 @@
+packages = ["opencv-python", "numpy"]
+name = "Test"
+[[fetch]]
+files = ["./yolox.py", "./model/yolox_nano.onnx"]
+

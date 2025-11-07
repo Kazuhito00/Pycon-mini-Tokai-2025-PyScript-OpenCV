@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            font-family: 'Courier New', monospace;
+            overflow: auto;
+            font-size: 14.4px;
+        }
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 8px 0;
+            font-size: 13.2px;
+            line-height: 1.4;
+        }
+        .keyword { color: #ff79c6; }
+        .string { color: #f1fa8c; }
+        .function { color: #50fa7b; }
+        .comment { color: #6272a4; }
+        .file-label {
+            color: #333;
+            font-weight: bold;
+            margin-top: 12px;
+            margin-bottom: 3px;
+            font-size: 16.8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="file-label">demo.html (抜粋)</div>
+    <pre><code><span class="keyword">&lt;script</span> type=<span class="string">"module"</span> src=<span class="string">"https://pyscript.net/releases/2025.8.1/core.js"</span><span class="keyword">&gt;&lt;/script&gt;</span>
+
+<span class="keyword">&lt;div</span> id=<span class="string">"folium"</span><span class="keyword">&gt;&lt;/div&gt;</span>
+<span class="keyword">&lt;script</span> type=<span class="string">"py"</span> src=<span class="string">"./main.py"</span> config=<span class="string">"./pyscript.toml"</span><span class="keyword">&gt;&lt;/script&gt;</span></code></pre>
+
+    <div class="file-label">main.py</div>
+    <pre><code><span class="keyword">from</span> pyscript <span class="keyword">import</span> display
+<span class="keyword">import</span> folium
+<span class="keyword">import</span> json
+<span class="keyword">import</span> pandas <span class="keyword">as</span> pd
+<span class="keyword">from</span> pyodide.http <span class="keyword">import</span> open_url
+
+<span class="comment"># データのURL</span>
+url = <span class="string">"https://raw.githubusercontent.com/python-visualization/folium/master/examples/data"</span>
+state_geo = <span class="function">f</span><span class="string">"{url}/us-states.json"</span>
+state_unemployment = <span class="function">f</span><span class="string">"{url}/US_Unemployment_Oct2012.csv"</span>
+
+<span class="comment"># データ読み込み</span>
+state_data = pd.<span class="function">read_csv</span>(<span class="function">open_url</span>(state_unemployment))
+geo_json = json.<span class="function">loads</span>(<span class="function">open_url</span>(state_geo).<span class="function">read</span>())
+
+<span class="comment"># マップ作成</span>
+m = folium.<span class="function">Map</span>(location=[<span class="string">48</span>, <span class="string">-102</span>], zoom_start=<span class="string">3</span>)
+
+folium.<span class="function">Choropleth</span>(
+    geo_data=geo_json,
+    name=<span class="string">"choropleth"</span>,
+    data=state_data,
+    columns=[<span class="string">"State"</span>, <span class="string">"Unemployment"</span>],
+    key_on=<span class="string">"feature.id"</span>,
+    fill_color=<span class="string">"YlGn"</span>,
+    fill_opacity=<span class="string">0.7</span>,
+    line_opacity=<span class="string">0.2</span>,
+    legend_name=<span class="string">"Unemployment Rate (%)"</span>,
+).<span class="function">add_to</span>(m)
+
+folium.<span class="function">LayerControl</span>().<span class="function">add_to</span>(m)
+
+<span class="function">display</span>(m, target=<span class="string">"folium"</span>)</code></pre>
+
+    <div class="file-label">pyscript.toml</div>
+    <pre><code>name = <span class="string">"Folium"</span>
+description = <span class="string">"A simple application that uses pandas and folium"</span>
+packages = [<span class="string">"folium"</span>, <span class="string">"pandas"</span>]</code></pre>
+</body>
+</html>

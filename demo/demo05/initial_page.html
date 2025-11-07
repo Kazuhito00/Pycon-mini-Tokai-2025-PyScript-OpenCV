@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            font-family: 'Courier New', monospace;
+            overflow: auto;
+            font-size: 14.4px;
+        }
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 8px 0;
+            font-size: 12px;
+            line-height: 1.3;
+        }
+        .keyword { color: #ff79c6; }
+        .string { color: #f1fa8c; }
+        .function { color: #50fa7b; }
+        .comment { color: #6272a4; }
+        .file-label {
+            color: #333;
+            font-weight: bold;
+            margin-top: 12px;
+            margin-bottom: 3px;
+            font-size: 16.8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="file-label">demo.html (抜粋)</div>
+    <pre><code><span class="keyword">&lt;link</span> rel=<span class="string">"stylesheet"</span> href=<span class="string">"https://pyscript.net/releases/2025.10.3/core.css"</span><span class="keyword">&gt;</span>
+<span class="keyword">&lt;script</span> type=<span class="string">"module"</span> src=<span class="string">"https://pyscript.net/releases/2025.10.3/core.js"</span><span class="keyword">&gt;&lt;/script&gt;</span>
+
+<span class="keyword">&lt;py-config</span> src=<span class="string">"./pyscript.toml"</span><span class="keyword">&gt;&lt;/py-config&gt;</span>
+<span class="keyword">&lt;py-script</span> src=<span class="string">"./main.py"</span><span class="keyword">&gt;&lt;/py-script&gt;</span>
+<span class="keyword">&lt;video</span> id=<span class="string">"myCamera"</span> width=<span class="string">"800"</span> height=<span class="string">"600"</span> autoplay style=<span class="string">"display:none;"</span><span class="keyword">&gt;&lt;/video&gt;</span>
+<span class="keyword">&lt;canvas</span> id=<span class="string">"canvas"</span> width=<span class="string">"544"</span> height=<span class="string">"408"</span><span class="keyword">&gt;&lt;/canvas&gt;</span></code></pre>
+
+    <div class="file-label">main.py (抜粋)</div>
+    <pre><code><span class="keyword">import</span> js, cv2, numpy <span class="keyword">as</span> np, time, asyncio
+<span class="keyword">from</span> js <span class="keyword">import</span> ImageData, Uint8ClampedArray
+<span class="keyword">from</span> yolov9wholebody25 <span class="keyword">import</span> preprocess, postprocess_nms, postprocess_subclass, draw_debug
+
+<span class="comment"># (中略: ビデオ・キャンバス要素の取得)</span>
+
+<span class="comment"># YOLOv9-Wholebody25準備</span>
+net = cv2.dnn.<span class="function">readNet</span>(<span class="string">'model/yolov9_n_wholebody25_0100_1x3x192x320.onnx'</span>)
+model_input_size = (<span class="string">320</span>, <span class="string">192</span>)
+
+camera_stream = <span class="keyword">None</span>
+is_running = <span class="keyword">True</span>
+
+<span class="keyword">async def</span> <span class="function">start_camera</span>():
+    <span class="keyword">global</span> camera_stream
+    camera_stream = <span class="keyword">await</span> js.navigator.mediaDevices.<span class="function">getUserMedia</span>(<span class="comment">...</span>)
+    video.srcObject = camera_stream
+    <span class="keyword">await</span> <span class="function">process_frames</span>()
+
+<span class="keyword">def</span> <span class="function">stop_camera</span>():
+    <span class="keyword">global</span> camera_stream, is_running
+    is_running = <span class="keyword">False</span>
+    <span class="keyword">if</span> camera_stream:
+        tracks = camera_stream.<span class="function">getTracks</span>()
+        <span class="keyword">for</span> track <span class="keyword">in</span> tracks:
+            track.<span class="function">stop</span>()
+        video.srcObject = <span class="keyword">None</span>
+
+<span class="keyword">async def</span> <span class="function">process_frames</span>():
+    <span class="keyword">while</span> is_running:
+        <span class="comment"># ビデオフレームを取得</span>
+        context.<span class="function">drawImage</span>(video, <span class="string">0</span>, <span class="string">0</span>, canvas.width, canvas.height)
+        image_data = context.<span class="function">getImageData</span>(<span class="string">0</span>, <span class="string">0</span>, canvas.width, canvas.height)
+
+        <span class="comment"># NumPy配列に変換</span>
+        data = np.<span class="function">array</span>(image_data.data.to_py(), dtype=np.uint8)
+        image = data.<span class="function">reshape</span>((canvas.height, canvas.width, <span class="string">4</span>))
+        image = cv2.<span class="function">cvtColor</span>(image, cv2.COLOR_RGBA2BGR)
+
+        <span class="comment"># 前処理（BGR->RGB、リサイズ、正規化、NCHW）</span>
+        input_image = <span class="function">preprocess</span>(image, model_input_size)
+
+        <span class="comment"># 推論実施</span>
+        net.<span class="function">setInput</span>(input_image, <span class="string">'images'</span>)
+        outputs = net.<span class="function">forward</span>(<span class="string">'output0'</span>)
+
+        <span class="comment"># 後処理（NMS + サブクラス分類）</span>
+        boxes = <span class="function">postprocess_nms</span>(outputs, (image_width, image_height),
+                                   model_input_size, score_th=<span class="string">0.3</span>, nms_th=<span class="string">0.3</span>)
+        processed_boxes = <span class="function">postprocess_subclass</span>(image, <span class="string">0.3</span>, <span class="string">0.75</span>, boxes, <span class="comment">...</span>)
+
+        <span class="comment"># 描画（姿勢推定結果）</span>
+        image = <span class="function">draw_debug</span>(image, processed_boxes, <span class="comment">...</span>)
+        cv2.<span class="function">putText</span>(image, <span class="function">f</span><span class="string">'{processing_time*1000:.2f} ms'</span>, (<span class="string">10</span>, <span class="string">30</span>), <span class="comment">...</span>)
+
+        <span class="comment"># 結果をキャンバスに描画</span>
+        image = cv2.<span class="function">cvtColor</span>(image, cv2.COLOR_BGR2RGBA)
+        buffer = image.<span class="function">flatten</span>().<span class="function">tobytes</span>()
+        js_image = ImageData.<span class="function">new</span>(<span class="function">Uint8ClampedArray</span>.<span class="function">new</span>(buffer), width, height)
+        context.<span class="function">putImageData</span>(js_image, <span class="string">0</span>, <span class="string">0</span>)
+        <span class="keyword">await</span> asyncio.<span class="function">sleep</span>(<span class="string">0</span>)
+
+<span class="comment"># JavaScriptから呼び出せるようにする</span>
+js.window.stopCamera = stop_camera
+asyncio.<span class="function">ensure_future</span>(<span class="function">start_camera</span>())</code></pre>
+
+    <div class="file-label">pyscript.toml</div>
+    <pre><code>packages = [<span class="string">"opencv-python"</span>, <span class="string">"numpy"</span>]
+name = <span class="string">"Test"</span>
+[[fetch]]
+files = [<span class="string">"./yolov9wholebody25.py"</span>, <span class="string">"./model/yolov9_n_wholebody25_0100_1x3x192x320.onnx"</span>]</code></pre>
+</body>
+</html>
