@@ -442,7 +442,7 @@ Pycon mini 東海（11:35 ～ 12:00）
 
 <!-- _class: section15 -->
 <!-- _paginate: false -->
-<!-- transition: slide 0.8s -->
+<!-- transition: slide 0.3s -->
 
 # まとめ
 
@@ -457,7 +457,7 @@ Pycon mini 東海（11:35 ～ 12:00）
 
 <!-- _class: section15 -->
 <!-- _paginate: false -->
-<!-- transition: slide 0.3s -->
+<!-- transition: slide 0.8s -->
 
 # 当日の質疑応答
 
