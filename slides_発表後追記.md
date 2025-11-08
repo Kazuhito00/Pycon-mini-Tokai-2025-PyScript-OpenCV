@@ -466,6 +466,7 @@ Pycon mini 東海（11:35 ～ 12:00）
 
 - **Q．PythonのWASIのTierを上げる議論がありましたが、<Br>　　PyScriptで追加が予定されている他のWASMなどはありますか？<br>A．SPyと言う静的型付けのPython風インタプリタが<br>　　研究検討されている模様**
 - **Q．Pyodideを利用しています。<br>　　Pyodideと比べた時のPyScriptの推しポイントを教えてください<br>A．Pyodideに比べてHTMLやpyファイルに<br>　　書きやすいように設計されており、ファイル分割などもしやすい**
+- **Q．OpenCV DNNモジュールは機械学習推論用のモジュールですか？<br>A．OpenCVに含まれる推論専用のモジュールです。<br>　　　　　他ライブラリ(TensorFlow/PyTorchなど)で<br>　　　　　学習したモデルを読み込みます。**
 
 ---
 
