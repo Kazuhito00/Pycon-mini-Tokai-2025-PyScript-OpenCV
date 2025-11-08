@@ -10,7 +10,7 @@ https://kazuhito00.github.io/Pycon-mini-Tokai-2025-PyScript-OpenCV/index.html<br
 プレゼンテーションは[Marp](https://marp.app/)で作成しています。<br>
 Marpを用いてマークダウンから、HTMLファイルを出力する場合は以下のコマンドを実行します。
 ```
-marp --html slides.md -o slides.html --bespoke.osc=false
+marp --html slides.md -o index.html --bespoke.osc=false
 ```
 ローカルで試したい場合は、Pythonなどでローカルサーバーを立ち上げてください。
 ```
