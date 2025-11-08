@@ -5,7 +5,17 @@ PyCon mini 東海 2025 のトーク「PyScriptとOpenCVを使ってWebで画像�
 
 # Public URL for the presentation
 プレゼン資料公開URLは以下です。<Br>
-https://kazuhito00.github.io/Pycon-mini-Tokai-2025-PyScript-OpenCV/index.html
+https://kazuhito00.github.io/Pycon-mini-Tokai-2025-PyScript-OpenCV/index.html<br>
+<Br>
+プレゼンテーションは[Marp](https://marp.app/)で作成しています。
+Marpを用いてマークダウンから、HTMLファイルを出力する場合は以下のコマンドを実行します。
+```
+marp --html slides.md -o slides.html --bespoke.osc=false
+```
+ローカルで試したい場合は、Pythonなどでローカルサーバーを立ち上げてください。
+```
+python -m http.server 8000
+```
 
 # Public URL for the demo
 デモ単体の公開URLは以下です。
@@ -17,6 +27,7 @@ https://kazuhito00.github.io/Pycon-mini-Tokai-2025-PyScript-OpenCV/index.html
 * YOLOv9-Wholebody28 物体検出<br>https://kazuhito00.github.io/Pycon-mini-Tokai-2025-PyScript-OpenCV/demo/demo07/demo.html
 
 # Reference
+* [Marp](https://marp.app/)
 * [PyScript Documentation](https://docs.pyscript.net/2025.10.3/)
 * [Packages built in Pyodide](https://pyodide.org/en/stable/usage/packages-in-pyodide.html)
 * [OpenCV Deep Neural Network module](https://docs.opencv.org/4.11.0/d6/d0f/group__dnn.html)
