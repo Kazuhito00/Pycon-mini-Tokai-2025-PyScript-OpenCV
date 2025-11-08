@@ -462,7 +462,6 @@ Pycon mini 東海（11:35 ～ 12:00）
 # 当日の質疑応答
 
 <br>　
-<br>　
 
 - **Q．PythonのWASIのTierを上げる議論がありましたが、<Br>　　PyScriptで追加が予定されている他のWASMなどはありますか？<br>A．SPyと言う静的型付けのPython風インタプリタが<br>　　研究検討されている模様**
 - **Q．Pyodideを利用しています。<br>　　Pyodideと比べた時のPyScriptの推しポイントを教えてください<br>A．Pyodideに比べてHTMLやpyファイルに<br>　　書きやすいように設計されており、ファイル分割などもしやすい**
