@@ -7,7 +7,7 @@ PyCon mini 東海 2025 のトーク「PyScriptとOpenCVを使ってWebで画像�
 プレゼン資料公開URLは以下です。<Br>
 https://kazuhito00.github.io/Pycon-mini-Tokai-2025-PyScript-OpenCV/index.html<br>
 <Br>
-プレゼンテーションは[Marp](https://marp.app/)で作成しています。
+プレゼンテーションは[Marp](https://marp.app/)で作成しています。<br>
 Marpを用いてマークダウンから、HTMLファイルを出力する場合は以下のコマンドを実行します。
 ```
 marp --html slides.md -o slides.html --bespoke.osc=false
